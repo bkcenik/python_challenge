@@ -13,7 +13,7 @@ with open(electionfile, newline='') as csvfile:
     #print(csvfile) #to check path
     electionreader = csv.reader(csvfile, delimiter=',') #read in the csv file
     election_header = next(electionreader) #skip header
-    print(f"Header: {election_header}") #print the header to confirm
+    #print(f"Header: {election_header}") #print the header to confirm
 
     # make empty lists
     votes_cast = [] #this will be used to count the total votes
