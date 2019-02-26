@@ -23,10 +23,14 @@ with open(electionfile, newline='') as csvfile:
     print("Election results:")
     print(splitter)
     for row in electionreader :
-        votes_cast.append(row[2])
+        votes_cast.append(row[2]) #add 3rd column to vote count
         votecount = len(votes_cast)
+        if row[2] not in candidate_list : #add names of candidates
+            candidate_list.append(row[2])
+            # print(candidate_list) #to check, commented out
     
     print(f"Total number of votes: {votecount}")
     print(splitter)
+
 
 
