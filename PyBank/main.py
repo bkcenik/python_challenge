@@ -40,5 +40,7 @@ with open(budgetpath, newline='') as csvfile:
     print(f"Greatest decrease was {greatest_decrease}, in {decrease_month}")
 
 #create the output file:
-#with open("output.txt", "w") as txtfile:
+outputpath = "output.txt"
 
+# with open(outputpath, "w") as txtfile:
+    
