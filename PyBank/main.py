@@ -28,7 +28,7 @@ with open(budgetpath, newline='') as csvfile:
         revenue_change.append(revenue[x] - revenue[x-1]) 
         #calculate revenue change
         #by subtracting each row from the previous
-        average_change = (sum(revenue_change)/len(revenue_change))
+        average_change = round((sum(revenue_change)/len(revenue_change)),2)
     print(f"Average change was ${average_change}.")
 
     # define greatest profit and loss
