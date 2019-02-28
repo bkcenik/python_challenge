@@ -44,3 +44,15 @@ with open(electionfile, newline='') as csvfile:
     winner = candidate_list[candidate_votes.index(max(candidate_votes))]
     print(f"Winner: {winner}")
     print(splitter)
+
+    outputpath = ("output.txt")
+    with open(outputpath, "w", newline = "") as text:
+        text.write(f"Election results:\n")
+        text.write(f"----------------------------------------------------------\n")
+        text.write(f"Total number of votes: {votecount}\n")
+        text.write(f"----------------------------------------------------------\n")
+        for x in range(len(candidate_list)):
+            text.write(f"{candidate_list[x]}: {percent_won}% ({candidate_votes[x]})\n")
+        text.write(f"----------------------------------------------------------\n")
+        text.write(f"Winner: {winner}\n")
+        text.write(f"----------------------------------------------------------")

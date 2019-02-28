@@ -1,46 +1,48 @@
 import os
 import csv
 
-budgetpath = os.path.join('Resources', 'budget_data.csv')
+filepath = os.path.join("Resources","budget_data.csv") #sets filepath
 
-with open(budgetpath, newline='') as csvfile:
-    print(csvfile) #tocheckpath
-    budgetreader = csv.reader(csvfile, delimiter=',') #read in file
-    budget_header = next(budgetreader) #skip header
-    print(f"Header: {budget_header}") #print the header to confirm
+with open(filepath, newline ="") as csvfile: #read in csvfile
+    csvreader = csv.reader(csvfile, delimiter =",")
+    head = next(csvreader) #skip header
 
-    #create lists for total month, revenue(profit/loss), revenue change
+    # make empty lists
     months = []
-    revenue = []
-    revenue_change = []
+    profit_loss = []
+    profit_loss_change = []
 
-    print("Financial Analysis:")
-    print("------------------------------------------------------------")
-
-    for row in budgetreader:
+    print("Financial analysis: \n----------------------------")
+    
+    for row in csvreader: #calculate total months and total revenue
         months.append(row[0])
-        totalmonth = len(months) #calculates number of months
-        revenue.append(int(row[1]))
-        totalrevenue = sum(revenue) #calculates total revenue
-    print(f"Total Months: {totalmonth}. \nTotal revenue: {totalrevenue}") #print output
+        totalmonth = len(months)
+        profit_loss.append(int(row[1]))
+        totalprofit = sum(profit_loss)
+    print(f"Total months: {totalmonth} \nTotal: ${totalprofit}")
     
-    for x in range(1, totalmonth):
-        revenue_change.append(revenue[x] - revenue[x-1]) 
-        #calculate revenue change
-        #by subtracting each row from the previous
-        average_change = round((sum(revenue_change)/len(revenue_change)),2)
-    print(f"Average change was ${average_change}.")
+    for x in range(1, totalmonth): #calculate revenue change
+        profit_loss_change.append(profit_loss[x] - profit_loss[x-1])
+        average_change = round((sum(profit_loss_change) / len(profit_loss_change)),2)
+    print(f"Average Change: ${average_change}")
 
-    # define greatest profit and loss
-    greatest_increase = max(revenue_change)
-    greatest_decrease = min(revenue_change)
-    increase_month = months[revenue_change.index(greatest_increase) + 1]
-    decrease_month = months[revenue_change.index(greatest_decrease) + 1]
-    print(f"Greatest increase was {greatest_increase}, in {increase_month}")
-    print(f"Greatest decrease was {greatest_decrease}, in {decrease_month}")
+    # calculate greatest increase and decrease, and corresponding months
+    greatest_increase = max(profit_loss_change)
+    greatest_decrease = min(profit_loss_change)
+    increase_month = months[profit_loss_change.index(greatest_increase) + 1]
+    decrease_month = months[profit_loss_change.index(greatest_decrease) + 1]
+    print(f"Greatest increase in profits: {increase_month} (${greatest_increase})")
+    print(f"Greatest decrease in profits: {decrease_month} (${greatest_decrease})")
 
-#create the output file:
-outputpath = "output.txt"
 
-# with open(outputpath, "w") as txtfile:
-    
+    outputpath = ("output.txt") # path to output file
+
+    with open(outputpath, "w", newline="") as text: #initialize text writer
+        line1 = text.write("Financial analysis:\n")
+        line2 = text.write("----------------------------\n")
+        line3 = text.write(f"Total months: {totalmonth}\n")
+        line4 = text.write(f"Total: ${totalprofit}\n")
+        line5 = text.write(f"Average Change: ${average_change}\n")
+        line6 = text.write(f"Greatest increase in profits: {increase_month} (${greatest_increase})\n")
+        line7 = text.write(f"Greatest decrease in profits: {decrease_month} (${greatest_decrease})")
+ 
