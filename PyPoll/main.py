@@ -52,6 +52,7 @@ with open(electionfile, newline='') as csvfile:
         text.write(f"Total number of votes: {votecount}\n")
         text.write(f"----------------------------------------------------------\n")
         for x in range(len(candidate_list)):
+            percent_won = round(int(candidate_votes[x])/votecount * 100, 3)
             text.write(f"{candidate_list[x]}: {percent_won}% ({candidate_votes[x]})\n")
         text.write(f"----------------------------------------------------------\n")
         text.write(f"Winner: {winner}\n")
